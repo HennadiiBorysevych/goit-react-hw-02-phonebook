@@ -1,8 +1,5 @@
 import React from 'react';
-import Form from './form/Form';
-import Title from './title/Title';
-import Contacts from './contacts/Contacts';
-import Filter from './filter/Filter';
+import { Form, Title, Contacts, Filter } from './index';
 import { nanoid } from 'nanoid';
 
 class App extends React.Component {

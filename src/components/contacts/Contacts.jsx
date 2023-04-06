@@ -9,7 +9,7 @@ import {
 
 class Contacts extends React.Component {
   render() {
-    const { contacts, filterContacts } = this.props;
+    const { contacts, filterContacts, onDeleteContact } = this.props;
     return (
       <ContactsContainer>
         <ContactsList>
@@ -18,10 +18,7 @@ class Contacts extends React.Component {
               <p>
                 {name}: {number}
               </p>
-              <Button
-                type="button"
-                onClick={() => this.props.onDeleteContact(id)}
-              >
+              <Button type="button" onClick={() => onDeleteContact(id)}>
                 Delete
               </Button>
             </ContactsItem>
