@@ -3,35 +3,31 @@ import Notification from './notafication/Notafication';
 import {
   ContactsContainer,
   ContactsList,
-  FilterTitle,
-  FilterInput,
   ContactsItem,
+  Button,
 } from './Contacts.styled';
-import { nanoid } from 'nanoid';
-
-const contactID = nanoid();
 
 class Contacts extends React.Component {
   render() {
-    const { contacts } = this.props;
+    const { contacts, filterContacts } = this.props;
     return (
       <ContactsContainer>
-        {contacts.length === 0 && <Notification message="No contacts yet :)" />}
-        {contacts.length > 0 && (
-          <>
-            <FilterTitle>
-              Find contacts by name
-              <FilterInput type="text" />
-            </FilterTitle>
-            <ContactsList>
-              {contacts.map(contact => (
-                <ContactsItem key={contactID}>
-                  {contact.name}: {contact.number}
-                </ContactsItem>
-              ))}
-            </ContactsList>
-          </>
-        )}
+        <ContactsList>
+          {filterContacts().map(({ id, name, number }) => (
+            <ContactsItem key={id}>
+              <p>
+                {name}: {number}
+              </p>
+              <Button
+                type="button"
+                onClick={() => this.props.onDeleteContact(id)}
+              >
+                Delete
+              </Button>
+            </ContactsItem>
+          ))}
+        </ContactsList>
+        {contacts.length === 0 && <Notification message="No Contacts" />}
       </ContactsContainer>
     );
   }

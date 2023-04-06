@@ -7,19 +7,18 @@ import {
   PhoneBookButton,
 } from './Form.styled';
 
-const nameId = nanoid();
-const numberId = nanoid();
-
 class Form extends React.Component {
+  nameId = nanoid();
+  numberId = nanoid();
   render() {
     const { onInputChange, onAddContact } = this.props;
     return (
       <div>
         <PhoneBookForm onSubmit={onAddContact}>
-          <PhoneBookLabel htmlFor={nameId}>
+          <PhoneBookLabel htmlFor={this.nameId}>
             Name
             <PhoneBookInput
-              id={nameId}
+              id={this.nameId}
               onChange={onInputChange}
               type="text"
               name="name"
@@ -28,10 +27,10 @@ class Form extends React.Component {
               required
             />
           </PhoneBookLabel>
-          <PhoneBookLabel htmlFor={numberId}>
+          <PhoneBookLabel htmlFor={this.numberId}>
             Number
             <PhoneBookInput
-              id={numberId}
+              id={this.numberId}
               onChange={onInputChange}
               type="tel"
               name="number"
