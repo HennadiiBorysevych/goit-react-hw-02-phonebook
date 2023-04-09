@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Form, Title, Contacts, Filter } from './index';
 import { nanoid } from 'nanoid';
