@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Notification from './notafication/Notafication';
 import {
   ContactsContainer,
@@ -30,3 +32,15 @@ class Contacts extends React.Component {
   }
 }
 export default Contacts;
+
+Contacts.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  filterContacts: PropTypes.func.isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
+};

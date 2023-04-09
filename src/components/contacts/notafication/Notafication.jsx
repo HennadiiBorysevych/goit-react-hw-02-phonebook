@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import { NotaficationBox, NotaficationText } from './Notafication.styled';
+
 const Notification = ({ message }) => {
   return (
     <NotaficationBox>
@@ -7,3 +9,7 @@ const Notification = ({ message }) => {
   );
 };
 export default Notification;
+
+Notification.propTypes = {
+  message: PropTypes.string.isRequired,
+};

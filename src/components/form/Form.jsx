@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { nanoid } from 'nanoid';
 import {
   PhoneBookForm,
@@ -46,3 +48,8 @@ class Form extends React.Component {
   }
 }
 export default Form;
+
+Form.propTypes = {
+  onInputChange: PropTypes.func.isRequired,
+  onAddContact: PropTypes.func.isRequired,
+};
