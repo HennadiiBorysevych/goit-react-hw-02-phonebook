@@ -1,5 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import * as Yup from 'yup';
+import { Formik, ErrorMessage } from 'formik';
 
 import { nanoid } from 'nanoid';
 import {
@@ -9,60 +10,43 @@ import {
   PhoneBookButton,
 } from './Form.styled';
 
-class Form extends React.Component {
-  state = {
-    name: '',
-    number: '',
+const validation = Yup.object().shape({
+  name: Yup.string().min(2).max(50).required(),
+  number: Yup.string().min(7).max(15).required(),
+});
+
+const initialsValues = {
+  name: '',
+  number: '',
+};
+const ContactForm = ({ onSubmit }) => {
+  const handleSubmit = (value, { resetForm }) => {
+    onSubmit(value.name, value.number, nanoid());
+    resetForm();
   };
-
-  onInputChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-    const { name, number } = this.state;
-    const { onSubmit } = this.props;
-    onSubmit(name, number, nanoid());
-    e.target.reset();
-  };
-
-  nameId = nanoid();
-  numberId = nanoid();
-
-  render() {
-    return (
-      <div>
-        <PhoneBookForm onSubmit={this.onSubmit}>
-          <PhoneBookLabel htmlFor={this.nameId}>
+  return (
+    <div>
+      <Formik
+        initialValues={initialsValues}
+        onSubmit={handleSubmit}
+        validationSchema={validation}
+      >
+        <PhoneBookForm>
+          <PhoneBookLabel>
             Name
-            <PhoneBookInput
-              id={this.nameId}
-              onChange={this.onInputChange}
-              type="text"
-              name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-            />
+            <PhoneBookInput type="text" name="name" />
+            <ErrorMessage name="name" />
           </PhoneBookLabel>
-          <PhoneBookLabel htmlFor={this.numberId}>
+          <PhoneBookLabel>
             Number
-            <PhoneBookInput
-              id={this.numberId}
-              onChange={this.onInputChange}
-              type="tel"
-              name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-            />
+            <PhoneBookInput type="tel" name="number" />
+            <ErrorMessage name="number" />
           </PhoneBookLabel>
           <PhoneBookButton type="submit">Add Contact</PhoneBookButton>
         </PhoneBookForm>
-      </div>
-    );
-  }
-}
-export default Form;
+      </Formik>
+    </div>
+  );
+};
+
+export default ContactForm;

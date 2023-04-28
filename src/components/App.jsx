@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Title, Contacts, Filter } from './index';
+import { ContactForm, Title, Contacts, Filter } from './index';
 
 class App extends React.Component {
   state = {
@@ -52,7 +52,7 @@ class App extends React.Component {
     return (
       <div>
         <Title title="PhoneBook" />
-        <Form onSubmit={this.onAddContact} />
+        <ContactForm onSubmit={this.onAddContact} />
         <Title title="Contacts" />
         <Filter
           onFilterChange={this.onFilterChange}

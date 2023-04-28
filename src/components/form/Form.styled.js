@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { Field, Form } from 'formik';
 
-export const PhoneBookForm = styled.form`
+export const PhoneBookForm = styled(Form)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,8 +20,7 @@ export const PhoneBookLabel = styled.label`
   font-size: 20px;
   font-weight: 700;
 `;
-export const PhoneBookInput = styled.input`
-  width: 100%;
+export const PhoneBookInput = styled(Field)`
   padding: 10px;
   box-sizing: border-box;
   font-size: 20px;
